@@ -1,11 +1,11 @@
 {
-  "name": "aqui-tna/gated-graph-neural-network-samples",
+  "name": "microsoft/gated-graph-neural-network-samples",
   "url": "https://github.com/aqui-tna/gated-graph-neural-network-samples",
-  "python_version": "3",
+  "python_version": "3.5",
   "requirements": {
     "req_file": "requirements.txt",
     "pip": [
-      "torch"
+      "pdb"
     ],
     "others": [
       "tar"
@@ -13,70 +13,181 @@
   },
   "to_run": {
       "decision": false,
-      "reason": "The project uses deprecated functions and libraries"
+      "reason": "The project needs some files to run"
   },
   "entries": [
       {
-        "cmd": "tar -xjvf data.tar.bz2",
-        "main": "unknown or the main file to execute",
+        "cmd": "python3 ./chem_tensorflow_dense.py",
+        "main": "chem_tensorflow_dense.py",
         "steps": [
-            "data-preparation or training or testing or data-preprocessing or anything else"
+            "Run dense Gated Graph Neural Networks"
         ],
-        "args_lib": "library used to parse arguments. Ex argparse or unknown",
+        "args_lib": "unknown",
         "args": [],
         "ins": [
             {
-            "type": "dir or file",
-            "location": "path to the location of the file or folder",
-            "artifact": "artifact type of the element: dataset,conf,metrics",
-            "ex_from": "Tells how the artifact was loaded to the project: either cmd (if loaded using arg from command line), manual (if hardcoded in the code), conf (from configuration file) or unknown",
+            "type": "file",
+            "location": "root",
+            "artifact": "conf",
+            "ex_from": "conf",
             "ex_in_repo": true
             }
         ],
         "outs": [
             {
-                "type": "dir or file",
-                "location": "path to the location of the file or folder",
-                "artifact": "artifact type of the element: dataset,conf,metrics",
-                "ex_from": "Tells how the artifact name was procided either cmd (if loaded using arg from command line), manual (if hardcoded in the code), conf (from configuration file) or unknown",
-                "ex_in_repo": true
+                "type": "dir",
+                "location": "root",
+                "artifact": "data",
+                "ex_from": "",
+                "ex_in_repo": false
             }
         ]
-        }
+        },
+        {
+          "cmd": "python3 ./chem_tensorflow_dense.py",
+          "main": "chem_tensorflow_dense.py",
+          "steps": [
+              "Run dense Gated Graph Neural Networks"
+          ],
+          "args_lib": "unknown",
+          "args": [
+            "batch_size",
+            "use_edge_bias",
+            "use_propagation_attention",
+            "use_edge_msg_avg_aggregation",
+            "residual_connections",
+            "layer_timestep",
+            "graph_rnn_cell",
+            "graph_rnn_activation",
+            "graph_state_dropout_keep_prob",
+            "task_sample_ratios",
+            "edge_weight_dropout_keep_prob"
+          ],
+          "ins": [
+              {
+              "type": "file",
+              "location": "root",
+              "artifact": "conf",
+              "ex_from": "conf",
+              "ex_in_repo": true
+              }
+          ],
+          "outs": [
+              {
+                  "type": "dir",
+                  "location": "root",
+                  "artifact": "data",
+                  "ex_from": "",
+                  "ex_in_repo": false
+              }
+          ]
+          },
+          {
+            "cmd": "python3 ./chem_tensorflow_gcn.py",
+            "main": "chem_tensorflow_gcn.py",
+            "steps": [
+                "Run dense Gated Graph Neural Networks"
+            ],
+            "args_lib": "unknown",
+            "args": [
+              "batch_size",
+              "task_sample_ratios",
+              "gcn_use_bias",
+              "graph_state_dropout_keep_prob"
+            ],
+            "ins": [
+                {
+                "type": "file",
+                "location": "root",
+                "artifact": "conf",
+                "ex_from": "conf",
+                "ex_in_repo": true
+                }
+            ],
+            "outs": [
+                {
+                    "type": "dir",
+                    "location": "root",
+                    "artifact": "data",
+                    "ex_from": "",
+                    "ex_in_repo": false
+                }
+            ]
+            },
+            {
+              "cmd": "python3 ./chem_tensorflow_async.py",
+              "main": "chem_tensorflow_async.py",
+              "steps": [
+                  "Run dense Gated Graph Neural Networks"
+              ],
+              "args_lib": "unknown",
+              "args": [
+                "num_nodes",
+                "use_edge_bias",
+                "propagation_rounds",
+                "propagation_substeps",
+                "graph_rnn_cell",
+                "graph_rnn_activation",
+                "graph_state_dropout_keep_prob",
+                "task_sample_ratios"
+              ],
+              "ins": [
+                  {
+                  "type": "file",
+                  "location": "root",
+                  "artifact": "conf",
+                  "ex_from": "conf",
+                  "ex_in_repo": true
+                  }
+              ],
+              "outs": [
+                  {
+                      "type": "dir",
+                      "location": "root",
+                      "artifact": "data",
+                      "ex_from": "",
+                      "ex_in_repo": false
+                  }
+              ]
+              }
     ],
   "ex_metrics": {
     "metrics_files": [
         {
-            "file_name": "filename of the file where metrics are stored",
-            "metrics": ["List of metrics stored in that file"]
+            "file_name": "",
+            "metrics": [""]
         }
     ],
-    "prints": ["list of metrics that are printed to stdout"],
-    "plots": ["list of metrics that are plotted"],
+    "prints": [""],
+    "plots": [""],
     "others": [
         {
             "name": "method name",
-            "in_repo": "true if the file is in the repo, false if not",
-            "metrics": "List of metrics saved using this method"
+            "in_repo": "false",
+            "metrics": ""
         }
     ]
   },
   "ex_hyperparams": {
-    "from_cmd": ["List of metrics read from cmd line"],
+    "from_cmd": [],
     "config_files": [
         {
-            "name": "filename of the file where the hyperparameters are stored",
-            "in_repo": "true if the file is in the repo, false if not",
-            "hyperparams": ["List of hyperparams stored in that file"]
+            "name": "",
+            "in_repo": "false",
+            "hyperparams": []
         }
     ],
     "in_code": [
-      "List of hyperparams manually specified in code"
+      "batch_size",
+      "graph_state_dropout_keep_prob",
+      "task_sample_ratios",
+      "use_edge_bias",
+      "edge_weight_dropout_keep_prob"
     ],
     "others": [
         {
-            "name": "method name",
-            "metrics": "List of metrics saved using this method"
+            "name": "",
+            "metrics": ""
         }
     ]
   }
